@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        // component
+        function Header({ slogan, title, onClick }) {
+            // Props is read-only
+            return <header onClick={onClick}>
+                <h1>{slogan}</h1>
+            </header>
+        }
+
+        function Button({ title, onClick, children }) {
+            console.log(children)
+            return <button onClick={onClick}>Button</button>
+        }
+
+        function Couter() {
+            //Hook 1
+            const [count, setCount] = React.useState(0)
+            return (
+                <>
+                    <h2>{count}</h2>
+                    <button onClick={() => setCount(count + 1)}>Increase</button>
+                </>
+            )
+        }
+
+        function UserList() {
+            const [users, setUser] = React.useState([])
+            const [loading, setLoading] = React.useState(true)
+
+            React.useEffect(() => {
+                setTimeout(() => {
+                    fetch("https://jsonplaceholder.typicode.com/users")
+                        .then((res) => res.json())
+                        .then((users) => {
+                            setUser(users)
+                        })
+                        .finally(() => {
+                            setLoading(false)
+                        })
+                }, 3000)
+            }, [users])
+
+            return <ul>
+                {loading && <li>...Loading</li>}
+                {users.map(user => <li key={user.id} >{user.name}</li>)}
+            </ul>
+        }
+
+        const app = <>
+            <Header
+                slogan="Học lập trình để đi làm"
+                title="Hello"
+                onClick={() => alert('Clicked !')}
+            />
+            <Button onClick={() => console.log('Click 1')}> Click me 123 </Button>
+            <Couter />
+            <UserList />
+        </>
+        const root = ReactDOM.createRoot(document.querySelector("#root"));
+        root.render(app);
+    </script>
+    <script src="./main.js"></script>
+</body>
+
+</html>
+
+
+
+<!-- 
+1. ReactJS: Làm web cần 2 thư viện sau:
+- React:
+- React DOM: Cầu nối giữa React & DOM
+
+2. React Native: Làm mobile app
+- React
+- React navite: Framework, là cầu nối giữa React & Native(gần với ngôn ngữ máy)
+-->

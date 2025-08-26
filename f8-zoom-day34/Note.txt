@@ -1,0 +1,49 @@
+1. Khái niệm cơ bản
+- ReactJS là một thư viện giúp xây dựng UI nhanh và chuyên nghiệp
+- Dựa trên tư tưởng Component(Chia nhỏ thành phần)
+- Không phải là framework
+- Hooks: useState, useEffect...
+- Cung cấp các cơ chế giúp tối ưu về hiệu năng
+
+2. SSR và CSR là gì?
+- SSR: Server side rendering
+       Tạo ra HTML hoàn chỉnh ở phía Server
+       -- KeyWord: Trả về HTML, CSS, JS đầy đủ
+- CSR: Client side rendering
+        Tạo ra HTML hoàn chỉnh ở phía Client
+        -- KeyWord: Trả về HTML tối thiểu, thường chỉ gồm
+        1. <div id="root"></div>
+        2. script src"js-file.js"
+
+Khác nhau ở HTML nhận về
+SSR sẽ trả cả ra ở lần get đầu tiên
+CSR thì chỉ trả về div root và inner dom vào
+
+
+3. 
+- Multiple Pages Application - SSR
+- Single Page Application - CSR
+
+4.
+    1. ReactJS: Làm web cần 2 thư viện sau:
+    - React:
+    - React DOM: Cầu nối giữa React & DOM
+
+    2. React Native: Làm mobile app
+    - React
+    - React navite: Framework, là cầu nối giữa React & Native(gần với ngôn ngữ máy)
+
+5. 
+
+Tạo một ReactElement: React.createElement('h1',{trong này là props || null}, childrend)
+React.createElement có thể thay thế bằng jsx
+Trong jsx các phần tử là null hoặc undefined thì sẽ bị bỏ qua
+Destructoring
+
+Cần nắm chắc về React Element
+
+6.
+Props và State
+
+
+State: Dữ liệu hiển thị ra UI
