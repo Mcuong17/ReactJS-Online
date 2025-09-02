@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couter app</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        .wrapper-counter {
+            background: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0.8),
+                    rgba(0, 0, 0, 0.6),
+                    rgba(0, 0, 0, 0.4),
+                    rgba(0, 0, 0, 0.2),
+                    rgba(0, 0, 0, 0.0));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 20px;
+        }
+
+        .title-app {
+            text-align: center;
+            font-weight: 500;
+            font-size: 18px;
+        }
+
+        .wrapper-number-counter {
+            width: 200px;
+            height: 200px;
+            margin: 100px auto 50px;
+            border-radius: 50%;
+            border: 10px solid #9fc4de;
+        }
+
+        .number-count {
+            width: 100px;
+            margin: 60px auto 0;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.1);
+            align-content: center;
+            border-radius: 14px;
+            font-size: 24px;
+        }
+
+        .wrapper-button {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-action {
+            flex: 1;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            color: #fff;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s ease;
+        }
+
+
+        .button-action:hover {
+            background: rgba(0, 0, 0, 0.75);
+            transform: translateY(-2px);
+        }
+
+        .status-text {
+            margin: 0;
+            text-align: center;
+            padding-top: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .status-text.positive {
+            color: #1bcb59
+        }
+
+        .status-text.negative {
+            color: #f66c71;
+        }
+
+        button-action:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+           <div class="wrapper-menu-left">
+            <div class="logo-menu">
+                <img src="./assets/logo.png" alt="logo">
+            </div>
+            <div class="nav-items">
+                <a href="couterapp.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">calculate</span>
+                    <div class="nav-item--text">
+                        Counter App
+                    </div>
+                </a>
+                <a href="todolist.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">checklist</span>
+                    <div class="nav-item--text">
+                        Todo List App
+                    </div>
+                </a>
+                <a href="profile.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">account_box</span>
+                    <div class="nav-item--text">
+                        Profile Card
+                    </div>
+                </a>
+                <a href="products.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">inventory_2</span>
+                    <div class="nav-item--text">
+                        Product List
+                    </div>
+                </a>
+                <a href="comments.html" class="nav-item nav-item--link">
+                    <span class="nav-item--icon material-icons">comment</span>
+                    <div class="nav-item--text">
+                        Commnent System
+                    </div>
+                </a>
+                <a href="weather.html" class="nav-item nav-item--link">
+                    <span class="nav-item--icon material-icons">cloud</span>
+                    <div class="nav-item--text">
+                        Weather App
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="wrapper-content">
+            <div id="root"></div>
+        </div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+        function NumberCounter() {
+            const [count, setCount] = React.useState(0)
+
+            return <>
+                <div className="wrapper-number-counter" style={{ borderColor: count > 0 ? '#41aeff' : count < 0 ? '#f66c71' : '#9fc4de' }}>
+                    <div className="number-count">{count}</div>
+                    <p className={count > 0 ? 'status-text positive' : count < 0 ? 'status-text negative' : 'status-text zero'}>
+                        {count > 0 ? 'Positive' : count < 0 ? 'Negative' : 'Equals 0'}
+                        {count > 0 && <span class="material-icons">trending_up</span>}
+                        {count < 0 && <span class="material-icons">trending_down</span>}
+                    </p>
+
+                </div>
+                <div className="button-action secondary" onClick={() => setCount(0)}>Reset to 0</div>
+                <div className="wrapper-button">
+                    <div className="button-action" onClick={() => setCount(count + 1)}>Increase</div>
+                    <div className="button-action" onClick={() => setCount(count - 1)}>Minus</div>
+                </div>
+            </>
+        }
+
+        const app =
+            <>
+                <div className="main-content">
+                    <div className="wrapper-counter">
+                        <h2 className="title-app">Simple Counter Number</h2>
+                        <NumberCounter />
+                    </div>
+                </div>
+
+            </>
+
+        const root = ReactDOM.createRoot(document.querySelector('#root'))
+        root.render(app)
+
+    </script>
+</body>
+
+</html>

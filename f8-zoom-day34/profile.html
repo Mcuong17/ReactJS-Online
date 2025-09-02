@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <style>
+
+
+        .wrapper-counter {
+            background-color: #fff;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 20px;
+            width: 450px;
+        }
+
+        .title-app {
+            text-align: center;
+            font-weight: 500;
+            font-size: 18px;
+            /* color: #1d1d1d  ; */
+        }
+
+        .wrapper-card {
+            border: 1px solid #fff;
+            padding: 20px 36px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-avatar {
+            background-image: url(./assets/avatar.png);
+            width: 150px;
+            height: 150px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0 auto;
+            border: 6px solid #b71540;
+            border-radius: 50%;
+        }
+
+        .wrapper-card-body {
+            color: #1d1d1d;
+        }
+
+        .wrapper-card-info {
+            border: 1px solid #D1D1D1;
+            padding: 16px;
+            border-radius: 20px;
+        }
+
+        .card-name {
+            text-align: center;
+            padding: 6px 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .card-item {
+            padding: 14px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #D1D1D1;
+        }
+
+        .lable-type {
+            font-weight: 600;
+        }
+
+        button-action:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            border-radius: 20px;
+        }
+
+        .loader {
+            width: 40px;
+            height: 40px;
+            --c: no-repeat linear-gradient(orange 0 0);
+            background: var(--c), var(--c), var(--c), var(--c);
+            background-size: 21px 21px;
+            animation: l5 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+        }
+
+        @keyframes l5 {
+            0% {
+                background-position: 0 0, 100% 0, 100% 100%, 0 100%
+            }
+
+            33% {
+                background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+                width: 60px;
+                height: 60px
+            }
+
+            66% {
+                background-position: 100% 0, 100% 100%, 0 100%, 0 0;
+                width: 60px;
+                height: 60px
+            }
+
+            100% {
+                background-position: 100% 0, 100% 100%, 0 100%, 0 0
+            }
+        }
+    </style>
+</head>
+
+<body>
+           <div class="wrapper-menu-left">
+            <div class="logo-menu">
+                <img src="./assets/logo.png" alt="logo">
+            </div>
+            <div class="nav-items">
+                <a href="couterapp.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">calculate</span>
+                    <div class="nav-item--text">
+                        Counter App
+                    </div>
+                </a>
+                <a href="todolist.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">checklist</span>
+                    <div class="nav-item--text">
+                        Todo List App
+                    </div>
+                </a>
+                <a href="profile.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">account_box</span>
+                    <div class="nav-item--text">
+                        Profile Card
+                    </div>
+                </a>
+                <a href="products.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">inventory_2</span>
+                    <div class="nav-item--text">
+                        Product List
+                    </div>
+                </a>
+                <a href="comments.html" class="nav-item nav-item--link">
+                    <span class="nav-item--icon material-icons">comment</span>
+                    <div class="nav-item--text">
+                        Commnent System
+                    </div>
+                </a>
+                <a href="weather.html" class="nav-item nav-item--link">
+                    <span class="nav-item--icon material-icons">cloud</span>
+                    <div class="nav-item--text">
+                        Weather App
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="wrapper-content">
+            <div id="root"></div>
+        </div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+        function CardProfile() {
+            const [user, setUser] = React.useState({})
+            const [loading, setLoading] = React.useState(true)
+            React.useEffect(() => {
+                fetch('https://jsonplaceholder.typicode.com/users/1')
+                    .then((res) => res.json())
+                    .then((user) =>  setTimeout(() => {
+                        setUser(user)
+                    }, 3000))
+                    .finally(() => setTimeout(() => {
+                        setLoading(false)
+                    }, 3000))
+            }, [])
+
+
+
+
+
+            return <>
+                <div className="wrapper-card-header">
+                    <div className="card-avatar">
+
+                    </div>
+                </div>
+                <div className="wrapper-card-body">
+                    <div className="card-name">{user.name}</div>
+                    <div className="wrapper-card-info">
+                        <div className="card-item">
+                            <div className="lable-type">User Name</div>
+                            <div className="card-value">{user.username}</div>
+                        </div>
+                        <div className="card-item">
+                            <div className="lable-type">Email</div>
+                            <div className="card-value">{user.email}</div>
+                        </div>
+                        <div className="card-item">
+                            <div className="lable-type">Phone</div>
+                            <div className="card-value">{user.phone}</div>
+                        </div>
+                        <div className="card-item">
+                            <div className="lable-type">Website</div>
+                            <div className="card-value">{user.website}</div>
+                        </div>
+                        <div className="card-item">
+                            <div className="lable-type">Address</div>
+                            <div className="card-value">{user?.address?.suite} - {user?.address?.city}</div>
+                        </div>
+                    </div>
+
+                </div>
+                {loading && <div className="loading-overlay">
+                    <div className="loader"></div>
+                </div>}
+            </>
+        }
+
+
+        const app =
+            <>
+                <div className="main-content">
+                    <div className="wrapper-counter">
+                        <h2 className="title-app">Profile Card</h2>
+                        <CardProfile />
+                    </div>
+                </div>
+
+            </>
+
+        const root = ReactDOM.createRoot(document.querySelector('#root'))
+        root.render(app)
+
+    </script>
+</body>
+
+</html>

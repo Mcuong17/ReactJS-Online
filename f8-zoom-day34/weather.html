@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        .wrapper-app {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .wrapper-weather {
+            width: 480px;
+            height: 100%;
+            border-radius: 20px;
+            margin: 0px auto;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            background: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0.8),
+                    rgba(0, 0, 0, 0.6));
+            color: #fff;
+        }
+
+        .wrapper-select {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .btn-refesh {
+            position: absolute;
+            right: 0;
+            cursor: pointer;
+        }
+
+        .wrapper-select>select {
+            height: 40px;
+            font-size: 20px;
+            background-color: unset;
+            border: unset;
+            outline: none;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .wrapper-select option {
+            background-color: #333;
+            color: white;
+        }
+
+        .wrapper-select option:hover {
+            background-color: #0787a7;
+            color: white;
+        }
+
+        .icon-weather-main {
+            width: 200px;
+            height: 200px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 20px auto;
+        }
+
+        .icon-weather-main.sunny {
+            background-image: url(./assets/sunny1.gif);
+        }
+
+        .icon-weather-main.cloudy {
+            background-image: url(./assets/cloudy.png);
+        }
+
+        .icon-weather-main.lightrain {
+            background-image: url(./assets/raining.png);
+        }
+
+        .icon-weather-main.heavyrain {
+            background-image: url(./assets/rainy.png);
+        }
+
+        .temperature {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            padding-bottom: 16px;
+        }
+
+        .temperature-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 9999px;
+            border: 1px solid #fff;
+        }
+
+        .temperature-number {
+            font-size: 80px;
+            font-weight: 800;
+            position: relative;
+        }
+
+        .temperature-number::before {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border: 1px solid #fff;
+            border-radius: 9999px;
+            position: absolute;
+            right: -8px;
+            top: 25%;
+        }
+
+        .weather-status {
+            font-size: 30px;
+            font-weight: 500;
+            position: absolute;
+            bottom: 0;
+            white-space: nowrap;
+        }
+
+        .wrapper-item-weather {
+            display: flex;
+            padding: 8px 16px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            width: 90%;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+
+        .item-weather {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 0 0 30%;
+        }
+
+        .icon-weather {
+            width: 30px;
+            height: 30px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .icon-weather.wind-icon {
+            background-image: url(./assets/wind.png);
+        }
+
+        .icon-weather.humidity-icon {
+            background-image: url(./assets/hot.png);
+        }
+
+        .icon-weather.rain-icon {
+            background-image: url(./assets/rainy.png);
+        }
+
+        .icon-weather.sunny-icon {
+            background-image: url(./assets/sun.png);
+        }
+
+        .icon-weather.cloud-icon {
+            background-image: url(./assets/cloudy.png);
+        }
+
+        .slash {
+            width: 1px;
+            background-color: #d9e0e0;
+        }
+
+        .weather-bottom {
+            width: 90%;
+            margin-top: 20px;
+        }
+
+        .weather-bottom .title {
+            padding: 14px 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .forecast-list {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .forecast-item {
+            padding: 8px 16px;
+            background-color: rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 20px;
+        }
+
+        .forecast-temperature {
+            position: relative;
+        }
+
+        .forecast-temperature .temperature-dot {
+            position: absolute;
+            top: 0;
+            right: -6px;
+        }
+
+        .text-item-name {
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="wrapper-menu-left">
+            <div class="logo-menu">
+                <img src="./assets/logo.png" alt="logo">
+            </div>
+            <div class="nav-items">
+                <a href="couterapp.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">calculate</span>
+                    <div class="nav-item--text">
+                        Counter App
+                    </div>
+                </a>
+                <a href="todolist.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">checklist</span>
+                    <div class="nav-item--text">
+                        Todo List App
+                    </div>
+                </a>
+                <a href="profile.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">account_box</span>
+                    <div class="nav-item--text">
+                        Profile Card
+                    </div>
+                </a>
+                <a href="products.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">inventory_2</span>
+                    <div class="nav-item--text">
+                        Product List
+                    </div>
+                </a>
+                <a href="comments.html" class="nav-item nav-item--link">
+                    <span class="nav-item--icon material-icons">comment</span>
+                    <div class="nav-item--text">
+                        Commnent System
+                    </div>
+                </a>
+                <a href="weather.html" class="nav-item nav-item--link">
+                    <span class="nav-item--icon material-icons">cloud</span>
+                    <div class="nav-item--text">
+                        Weather App
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="wrapper-content">
+            <div id="root"></div>
+        </div>
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script type="text/babel">
+
+            const weatherData = {
+                "hanoi": {
+                    city: "Hà Nội", temp: 28, weather: "Sunny", humidity: 65, wind: '13 km/h', rain: '20',
+                    forecast: [
+                        { time: '10:00', status: 'sunny', temp: 28 },
+                        { time: '11:00', status: 'rain', temp: 20 },
+                        { time: '12:00', status: 'cloud', temp: 23 },
+                        { time: '13:00', status: 'rain', temp: 21 },
+                    ]
+                },
+                "hochiminh": {
+                    city: "TP.HCM", temp: 32, weather: "Cloudy", humidity: 78, wind: '15 km/h', rain: '40',
+                    forecast: [
+                        { time: '10:00', status: 'cloud', temp: 22 },
+                        { time: '11:00', status: 'sunny', temp: 20 },
+                        { time: '12:00', status: 'rain', temp: 23 },
+                        { time: '13:00', status: 'sunny', temp: 29 },
+                    ]
+                },
+                "danang": {
+                    city: "Đà Nẵng", temp: 30, weather: "Light rain", humidity: 82, wind: '10 km/h', rain: '70',
+                    forecast: [
+                        { time: '10:00', status: 'sunny', temp: 29 },
+                        { time: '11:00', status: 'cloud', temp: 25 },
+                        { time: '12:00', status: 'sunny', temp: 28 },
+                        { time: '13:00', status: 'rain', temp: 23 },
+                    ]
+                },
+                "haiphong": {
+                    city: "Hai Phong", temp: 30, weather: "Heavy rain", humidity: 85, wind: '11 km/h', rain: '80',
+                    forecast: [
+                        { time: '10:00', status: 'rain', temp: 20 },
+                        { time: '11:00', status: 'rain', temp: 22 },
+                        { time: '12:00', status: 'rain', temp: 21 },
+                        { time: '13:00', status: 'sunny', temp: 26 },
+                    ]
+                },
+                "thanhhoa": {
+                    city: "Thanh Hoa", temp: 25, weather: "Sunny", humidity: 72, wind: '18 km/h', rain: '30',
+                    forecast: [
+                        { time: '10:00', status: 'sunny', temp: 26 },
+                        { time: '11:00', status: 'cloud', temp: 23 },
+                        { time: '12:00', status: 'cloud', temp: 24 },
+                        { time: '13:00', status: 'sunny', temp: 27 },
+                    ]
+                },
+            };
+
+            function Weather() {
+                const [location, setLocation] = React.useState('hanoi')
+                const [data, setData] = React.useState(weatherData)
+
+                const randomizeValue = (value) => {
+                    const delta = value * 0.05 // 5%
+                    const min = value - delta
+                    const max = value + delta
+                    return Math.round(Math.random() * (max - min) + min)
+                }
+                const handleRandom = () => {
+                    setData((prev) => {
+                        const newData = { ...prev }
+                        const loc = newData[location]
+
+                        newData[location] = {
+                            ...loc,
+                            temp: randomizeValue(loc.temp),
+                            humidity: randomizeValue(loc.humidity),
+                            rain: randomizeValue(parseInt(loc.rain)).toString(),
+                            forecast: loc.forecast.map(f => ({
+                                ...f,
+                                temp: randomizeValue(f.temp)
+                            }))
+                        }
+
+                        return newData
+                    })
+                }
+
+
+                return <>
+                    <div className="wrapper-app">
+                        <div className="wrapper-select">
+                            <select value={location} onChange={(e) => setLocation(e.target.value)}>
+                                <option value="hanoi">Ha Noi</option>
+                                <option value="hochiminh">Ho Chi Minh</option>
+                                <option value="thanhhoa">Thanh Hoa</option>
+                                <option value="danang">Da Nang</option>
+                                <option value="haiphong">Hai Phong</option>
+                            </select>
+                            <span className="material-icons btn-refesh" onClick={handleRandom}>change_circle</span>
+                        </div>
+
+                        <div className={`icon-weather-main ${location && data[location].weather.replace(/\s+/g, "").toLowerCase()}`}>
+
+                        </div>
+
+                        <div className="temperature">
+                            <h2 className="temperature-number">
+                                {location && data[location].temp}
+                            </h2>
+                            <div className="weather-status">{location && data[location].weather}</div>
+                        </div>
+
+
+                        <div className="wrapper-item-weather">
+                            <div className="item-weather wind">
+                                <div className="icon-weather wind-icon"></div>
+                                <div className="text-item-weather">{data[location].wind}</div>
+                                <div className="text-item-name">Wind</div>
+                            </div>
+                            <div className="slash"></div>
+                            <div className="item-weather humidity">
+                                <div className="icon-weather humidity-icon"></div>
+                                <div className="text-item-weather">{data[location].humidity} %</div>
+                                <div className="text-item-name">Humidity</div>
+                            </div>
+                            <div className="slash"></div>
+                            <div className="item-weather rain">
+                                <div className="icon-weather rain-icon"></div>
+                                <div className="text-item-weather">{data[location].rain} %</div>
+                                <div className="text-item-name">Rain</div>
+                            </div>
+                        </div>
+
+                        <div className="weather-bottom">
+                            <p className="title">Today</p>
+
+                            <div className="forecast-list">
+                                {data[location].forecast.map((item, index) => {
+                                    return (<div key={index} className="forecast-item">
+                                        <div className="forecast-temperature">{item.temp}<span className="temperature-dot"></span></div>
+                                        <div className={`icon-weather ${item.status}-icon`}></div>
+                                        <div className="forecast-time">{item.time}</div>
+                                    </div>)
+                                })}
+
+                            </div>
+                        </div>
+
+                    </div>
+                </>
+            }
+
+            const app = <div className="main-content">
+                <div className="wrapper-weather">
+                    <Weather />
+                </div>
+            </div>
+            const root = ReactDOM.createRoot(document.querySelector('#root'))
+            root.render(app)
+        </script>
+</body>
+
+</html>

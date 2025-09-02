@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        .wrapper-comment {
+            width: 768px;
+            height: 100%;
+            border-radius: 20px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .title-app {
+            text-align: center;
+        }
+
+        .wrapper-counter {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            padding: 20px;
+        }
+
+        .wrapper-post {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .post-item {
+            border: 1px solid #ddd;
+            padding: 16px;
+            border-radius: 16px;
+            margin: 14px 0;
+        }
+
+        .wrapper-user-infor {
+            display: flex;
+            align-items: anchor-center;
+            gap: 11px;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .user-avatar>img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .user-email,
+        .post-time {
+            font-size: 10px;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+        .post-content {
+            padding: 10px 0;
+        }
+
+        .input-comment {
+            height: 40px;
+            padding: 8px 14px;
+            border: 1px solid #766363;
+            border-radius: 6px;
+            font-size: 14px;
+            width: 49%;
+            outline: none;
+        }
+
+        textarea.input-comment {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .form-input {
+            width: 100%;
+        }
+
+        .form-input .wrapper-user-infor {
+            justify-content: space-between;
+        }
+
+        .wrapper-button {
+            display: flex;
+            justify-content: end;
+        }
+
+        .wrapper-button>button {
+            height: 40px;
+            border: none;
+            width: 150px;
+            background-color: #1b67cb;
+            color: aliceblue;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .child-comment {
+            position: relative;
+            width: 90%;
+        }
+
+        .icon-child {
+            position: absolute;
+            top: 50%;
+            left: -40px;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="wrapper-menu-left">
+            <div class="logo-menu">
+                <img src="./assets/logo.png" alt="logo">
+            </div>
+            <div class="nav-items">
+                <a href="couterapp.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">calculate</span>
+                    <div class="nav-item--text">
+                        Counter App
+                    </div>
+                </a>
+                <a href="todolist.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">checklist</span>
+                    <div class="nav-item--text">
+                        Todo List App
+                    </div>
+                </a>
+                <a href="profile.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">account_box</span>
+                    <div class="nav-item--text">
+                        Profile Card
+                    </div>
+                </a>
+                <a href="products.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">inventory_2</span>
+                    <div class="nav-item--text">
+                        Product List
+                    </div>
+                </a>
+                <a href="comments.html" class="nav-item nav-item--link">
+                    <span class="nav-item--icon material-icons">comment</span>
+                    <div class="nav-item--text">
+                        Commnent System
+                    </div>
+                </a>
+                 <a href="weather.html" class="nav-item nav-item--link">
+                    <span class="nav-item--icon material-icons">cloud</span>
+                    <div class="nav-item--text">
+                        Weather App
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="wrapper-content">
+            <div id="root"></div>
+        </div>
+        <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script type="text/babel">
+
+            function Comment() {
+                const [comment, setComment] = React.useState([])
+                const [name, setName] = React.useState('')
+                const [email, setEmail] = React.useState('')
+                const [body, setBody] = React.useState('')
+
+                React.useEffect(() => {
+                    fetch('https://jsonplaceholder.typicode.com/comments?postId=1')
+                        .then((res) => res.json())
+                        .then((comment) => setComment(comment))
+                }, [])
+
+                const handleChangeName = (value) => {
+                    setName(value)
+                }
+                const handleChangeBody = (value) => {
+                    setBody(value)
+                }
+                const handleChangeEmail = (value) => {
+                    setEmail(value)
+                }
+                const handlePostComment = () => {
+                    setComment(prevState => {
+                        const newComment = [{
+                            postId: 6,
+                            id: 6,
+                            name: name,
+                            email: email,
+                            body: body,
+                            time: 'Today a minute ago'
+                        },
+                        ...prevState]
+                        return newComment;
+                    })
+                    setName('')
+                    setEmail('')
+                    setBody('')
+                }
+
+                
+
+            return <>
+                <div className="wrapper-post">
+                    <div className="post-item main-post">
+                        <div className="wrapper-user-infor">
+                            <div className="user-avatar">
+                                <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?q=80&w=735&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="aa" />
+                            </div>
+                            <div className="user-name">
+                                Dariel Soura
+                            </div>
+                            <div className="user-email">
+                                DarielSoura@gmail.com
+                            </div>
+                        </div>
+
+                        <div className="post-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates accusamus vero tempore obcaecati, unde, ea qui impedit laborum nam, molestiae vel inventore alias sint fugit? Atque quisquam iste omnis libero.</div>
+                        <div className="post-time">Today 09:10PM</div>
+                    </div>
+
+                    <div className="post-item form-input">
+                        <p>Enter comment</p>
+                        <div className="wrapper-user-infor">
+                            <input placeholder="Enter name" className="input-comment" value={name} onChange={(e) => handleChangeName(e.target.value)} />
+                            <input placeholder="Enter email" className="input-comment" value={email} onChange={(e) => handleChangeEmail(e.target.value)} />
+
+                        </div>
+                        <textarea placeholder="Enter body" className="input-comment" value={body} onChange={(e) => handleChangeBody(e.target.value)} />
+                        <div className="wrapper-button">
+                            <button onClick={() => handlePostComment()}> Post</button>
+                        </div>
+                    </div>
+
+                    {comment && comment.map((item, index) => (
+                        <div key={index} className="post-item child-comment">
+                            <span className="material-icons icon-child">subdirectory_arrow_right</span>
+                            <div className="wrapper-user-infor">
+                                <div className="user-avatar">
+                                    <img src={`https://ui-avatars.com/api/?name=${item.name}&background=random`} alt={item.name} />
+                                </div>
+                                <div className="user-name">
+                                    {item.name}
+                                </div>
+                                <div className="user-email">
+                                    {item.email}
+                                </div>
+                            </div>
+
+
+                            <div className="post-content">{item.body}</div>
+                            <div className="post-time">{item.time || 'Today 09:10PM'}</div>
+                        </div>
+                    ))}
+
+                </div>
+            </>
+            }
+
+            const app = <div className="main-content">
+                <div className="wrapper-comment">
+                    <h2 className="title-app">Comment System</h2>
+                    <Comment />
+                </div>
+            </div>
+            const root = ReactDOM.createRoot(document.querySelector('#root'))
+            root.render(app)
+        </script>
+</body>
+
+</html>

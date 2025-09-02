@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        .wrapper-counter {
+            background: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0.8),
+                    rgba(0, 0, 0, 0.6),
+                    rgba(0, 0, 0, 0.5));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 20px;
+        }
+
+        .title-app {
+            text-align: center;
+            font-weight: 500;
+            font-size: 18px;
+        }
+
+        .wrapper-card {
+            border: 1px solid #fff;
+            padding: 20px 36px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .wrapper-card-left>.card-text {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .wrapper-card-left>.card-desc {
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        .status-todo {
+            width: 80px;
+            height: 80px;
+            border: 1px solid #ff5730;
+            border-radius: 50%;
+            background-color: #ff5730;
+            color: #000;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wrapper-todolist {
+            padding-top: 20px;
+        }
+
+        .wrapper-input {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .no-result {
+            padding: 20px;
+            border: 1px solid;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .input-add {
+            flex: 0 0 80%;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: none;
+            outline: none;
+        }
+
+        .input-add::placeholder {
+            color: #fff;
+            font-weight: 200;
+        }
+
+        .btn-add {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #ff5730;
+            border-radius: 50%;
+            background-color: #ff5730;
+            color: #000;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wrapper-tasks {
+            padding-top: 20px;
+        }
+
+        .task-item {
+            padding: 10px 16px;
+            border: 1px solid #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .task-item-left {
+            flex: 0 0 70%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .task-item-left.done > .task-item-check {
+            background-color: #58cc4c;
+            border-color: #1bcb59;
+        }
+        
+        .task-item-left.done > .task-item-name {
+            text-decoration: line-through;
+        }
+
+        .task-item-check {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #ff5730;
+            border-radius: 50%;
+        }
+
+        .button-action {
+            flex: 1;
+            text-align: center;
+            padding: 12px 20px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            color: #fff;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s ease;
+        }
+
+
+        .button-action:hover {
+            background: rgba(0, 0, 0, 0.75);
+            transform: translateY(-2px);
+        }
+
+        .status-text {
+            margin: 0;
+            text-align: center;
+            padding-top: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .status-text.positive {
+            color: #1bcb59
+        }
+
+        .status-text.negative {
+            color: #f66c71;
+        }
+
+        button-action:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+           <div class="wrapper-menu-left">
+            <div class="logo-menu">
+                <img src="./assets/logo.png" alt="logo">
+            </div>
+            <div class="nav-items">
+                <a href="couterapp.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">calculate</span>
+                    <div class="nav-item--text">
+                        Counter App
+                    </div>
+                </a>
+                <a href="todolist.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">checklist</span>
+                    <div class="nav-item--text">
+                        Todo List App
+                    </div>
+                </a>
+                <a href="profile.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">account_box</span>
+                    <div class="nav-item--text">
+                        Profile Card
+                    </div>
+                </a>
+                <a href="products.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">inventory_2</span>
+                    <div class="nav-item--text">
+                        Product List
+                    </div>
+                </a>
+                <a href="comments.html" class="nav-item nav-item--link">
+                    <span class="nav-item--icon material-icons">comment</span>
+                    <div class="nav-item--text">
+                        Commnent System
+                    </div>
+                </a>
+                <a href="weather.html" class="nav-item nav-item--link">
+                    <span class="nav-item--icon material-icons">cloud</span>
+                    <div class="nav-item--text">
+                        Weather App
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="wrapper-content">
+            <div id="root"></div>
+        </div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+        function TodoList() {
+
+            const [job, setJob] = React.useState([])
+            const [task, setTask] = React.useState('')
+            const [totalTask, setTotalTask] =  React.useState(0)
+
+            const handleAddTask = () => {
+                setJob(prevState => {
+                    const newJobs = [...prevState, {
+                        taskName: task,
+                        isDone: false
+                    }]
+                    return newJobs
+                })
+                setTask('')
+            }
+
+            const handleDeleteTask = (taskID) => {
+                setJob(prevState => prevState.filter((_,index) => index != taskID))
+            }
+
+            const handleDoneTask = (taskID) => {
+                setJob(prevState => {
+                    const newJobs = prevState.map((item, index) => {
+                        if(index === taskID) {
+                            return {
+                                ...item,
+                                isDone: true
+                            }
+                        }
+                        return item;
+                    })
+                    return newJobs
+                })
+
+                 setTotalTask()
+            }
+
+
+
+            return <>
+                <div className="wrapper-card">
+                    <div className="wrapper-card-left">
+                        <p className="card-text">Todo Done</p>
+                        <span className="card-desc">keep it up</span>
+                        <div className="wrapper-detail-task">
+
+                        </div>
+                    </div>
+                    <div className="wrapper-card-right">
+                        <div className="status-todo">{job.reduce((count, job) => job.isDone ? count + 1 : count, 0)}/{job.length}</div>
+                    </div>
+                </div>
+
+                <div className="wrapper-todolist">
+                    <div className="wrapper-input">
+                        <input
+                            className="input-add"
+                            placeholder="write tour next task"
+                            value={task}
+                            onChange={(e) => setTask(e.target.value)} />
+                        <div className="btn-add" onClick={handleAddTask}>
+                            <span className="material-icons">add</span>
+                        </div>
+                    </div>
+                    <div className="wrapper-tasks">
+                        {job.length == 0 &&
+                            <div className="no-result">
+                                <div className="">
+                                    <span className="material-icons">assignment_late</span> 
+                                </div>
+                                <div className="task-item-left">
+                                    You don't have any tasks, add a new one
+                                </div>
+                            </div>
+                        }
+                        {
+                            job.length > 0 &&
+                            job.map((item, index) => <div className="task-item" key={index}>
+                                <div className={item.isDone ? 'task-item-left done' : 'task-item-left'}>
+                                    <div className="task-item-check"  onClick={() => handleDoneTask(index)}></div>
+                                    <span className="task-item-name">{item.taskName}</span>
+                                </div>
+                                <div className="task-item-delete" onClick={() => handleDeleteTask(index)}><span className="material-icons">delete</span> </div>
+                            </div>
+
+                            )
+                        }
+                    </div>
+                </div>
+            </>
+        }
+
+
+        const app =
+            <>
+                <div className="main-content">
+                    <div className="wrapper-counter">
+                        <h2 className="title-app">Todo List</h2>
+                        <TodoList />
+                    </div>
+                </div>
+
+            </>
+
+        const root = ReactDOM.createRoot(document.querySelector('#root'))
+        root.render(app)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+    <style>
+        .wrapper-product {
+            background-color: #fff;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            color: white;
+            padding: 20px;
+            width: 80%;
+            overflow-y: scroll;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .title-app {
+            text-align: left;
+            font-weight: 500;
+            font-size: 18px;
+            color: #1d1d1d;
+        }
+
+        .product-content > table {
+            color: #1d1d1d;
+        }
+        .text-table-body {
+                max-width: 80%;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;
+        }
+
+        .button {
+            background-color: cadetblue;
+            color: #fff;
+            padding: 4px 14px;
+            border: 1px solid #fff;
+            border-radius: 14px;
+        }
+
+        button-action:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+       .product-content > table td {
+            padding: 10px;
+            text-align: center;
+        }
+       
+
+        .loading-overlay,
+        .overlay-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            border-radius: 20px;
+        }
+        .overlay-popup {
+            position: absolute;
+            padding: 20px;
+        }
+
+        .loader {
+            width: 40px;
+            height: 40px;
+            --c: no-repeat linear-gradient(orange 0 0);
+            background: var(--c), var(--c), var(--c), var(--c);
+            background-size: 21px 21px;
+            animation: l5 1.5s infinite cubic-bezier(0.3, 1, 0, 1);
+        }
+        .popup-content {
+            background-color: #fff;
+            color: #000;
+            border-radius: 20px;
+            padding: 20px;
+        }
+
+        @keyframes l5 {
+            0% {
+                background-position: 0 0, 100% 0, 100% 100%, 0 100%
+            }
+
+            33% {
+                background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+                width: 60px;
+                height: 60px
+            }
+
+            66% {
+                background-position: 100% 0, 100% 100%, 0 100%, 0 0;
+                width: 60px;
+                height: 60px
+            }
+
+            100% {
+                background-position: 100% 0, 100% 100%, 0 100%, 0 0
+            }
+        }
+    </style>
+</head>
+
+<body>
+          <div class="wrapper-menu-left">
+            <div class="logo-menu">
+                <img src="./assets/logo.png" alt="logo">
+            </div>
+            <div class="nav-items">
+                <a href="couterapp.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">calculate</span>
+                    <div class="nav-item--text">
+                        Counter App
+                    </div>
+                </a>
+                <a href="todolist.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">checklist</span>
+                    <div class="nav-item--text">
+                        Todo List App
+                    </div>
+                </a>
+                <a href="profile.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">account_box</span>
+                    <div class="nav-item--text">
+                        Profile Card
+                    </div>
+                </a>
+                <a href="products.html" class="nav-item nav-item--link" target="contentFrame">
+                    <span class="nav-item--icon material-icons">inventory_2</span>
+                    <div class="nav-item--text">
+                        Product List
+                    </div>
+                </a>
+                <a href="comments.html" class="nav-item nav-item--link">
+                    <span class="nav-item--icon material-icons">comment</span>
+                    <div class="nav-item--text">
+                        Commnent System
+                    </div>
+                </a>
+                <a href="weather.html" class="nav-item nav-item--link">
+                    <span class="nav-item--icon material-icons">cloud</span>
+                    <div class="nav-item--text">
+                        Weather App
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="wrapper-content">
+            <div id="root"></div>
+        </div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+        function ProductList() {
+            const [products, setProducts] = React.useState([])
+            const [loading, setLoading] = React.useState(true)
+            const [showPopup, setShowPopup] = React.useState(false)
+            const [contentPopup, setcontentPopup] = React.useState('')
+
+            React.useEffect(() => {
+                fetch('https://jsonplaceholder.typicode.com/posts?_limit=12')
+                    .then((res) => res.json())
+                    .then((data) => {
+                        setTimeout(() => {
+                            setProducts(data) // gán data vào state
+                            setLoading(false) // tắt loading
+                        }, 2000) // delay để thấy spinner
+                    })
+            }, [])
+
+            const handleClickRow = (conent) => {
+                setcontentPopup(conent)
+                setShowPopup(true)
+            }
+
+            const handleClosePopup = () => {
+                setShowPopup(!showPopup)
+                 setcontentPopup('')
+            }
+
+            return (
+                <>
+                    <div>
+                        <div className="product-header">Product List</div>
+                        <div className="product-content">
+                            {!loading && (
+                                <table border="1" width="100%" cellPadding="10" style={{ borderCollapse: "collapse", textAlign: "center" }}>
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Title</th>
+                                            <th>Body</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {products.map((item) => (
+                                            <tr key={item.id}>
+                                                <td>{item.id}</td>
+                                                <td>{item.title?.slice(0, 10)}</td>
+                                                <td><p className="text-table-body">{item.body?.slice(0, 100)}</p></td>
+                                                <td><button className="button" onClick={() => handleClickRow(item.body)}>Detail</button></td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            )}
+                        </div>
+                    </div>
+
+                    {loading && (
+                        <div className="loading-overlay">
+                            <div className="loader"></div>
+                        </div>
+                    )}
+
+                    {showPopup && (
+                         <div className="overlay-popup" onClick={() => handleClosePopup()}>
+                            <div className="popup-content" onClick={(e) => e.stopPropagation()}><div style={{fontWeight: 600}}>Detail body:</div> {contentPopup}</div>
+                        </div>
+                    )}
+                </>
+            )
+        }
+
+        const app =
+            <div className="main-content">
+                <div className="wrapper-product">
+                    <h2 className="title-app">Product List</h2>
+                    <ProductList />
+                </div>
+            </div>
+
+        const root = ReactDOM.createRoot(document.querySelector('#root'))
+        root.render(app)
+
+    </script>
+
+</body>
+
+</html>

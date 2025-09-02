@@ -47,3 +47,14 @@ Props và State
 
 
 State: Dữ liệu hiển thị ra UI
+
+
+
+
+1. ReactJS: Làm web cần 2 thư viện sau:
+- React:
+- React DOM: Cầu nối giữa React & DOM
+
+2. React Native: Làm mobile app
+- React
+- React navite: Framework, là cầu nối giữa React & Native(gần với ngôn ngữ máy)
