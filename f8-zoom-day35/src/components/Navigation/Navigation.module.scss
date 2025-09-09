@@ -1,0 +1,26 @@
+
+.navWrapper {
+    background-color: #fafafa;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.navWrapper > ul {
+   
+}
+
+.navItem {
+    padding: 14px;
+}
+
+.navItem > a {
+    color: rgb(8, 182, 110);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.navItem > a.active {
+    color: rgb(14, 46, 151);
+    font-weight: 600;
+}

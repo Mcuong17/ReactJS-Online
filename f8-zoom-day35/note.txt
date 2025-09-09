@@ -1,0 +1,10 @@
+Khi dùng useState để khởi tạo giá trị ban đầu mà cần xử lý logic nặng thì đưa
+vào callback trước 
+
+
+- B1: dùng Browser Router bọc App  import {BrowserRouter} from "react-router"
+- B2: Import và thiết lập định tuyến đến các page: Routes, Route(path, element), nên tách 
+        vào bên trong app
+- B3: Thêm menu để đi đến các định tuyến đó thông qua nav
+        navLink: Dùng để làm menu, <NavLink to="/"/>, nhận vào callback isActive để nhận biế active hay không
+        LinkL cho link thông thường
