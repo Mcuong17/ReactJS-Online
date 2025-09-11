@@ -61,7 +61,7 @@ function Navigation() {
             <ul>
                 {navItem.map((item, index) => 
                     <li key={index} className={styles.navItem}>
-                        {<item.icon/>}
+                        
                         <NavLink to={item.to} className={({isActive}) => isActive ? styles.active: ''}>{item.title}</NavLink>
                     </li>)
                 }

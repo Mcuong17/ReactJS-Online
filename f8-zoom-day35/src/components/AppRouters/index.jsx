@@ -11,10 +11,12 @@ import Weather from "../../pages/Weather";
 import Todo from "../../pages/Todo";
 import Button from "../../pages/Button";
 import Comment from "../../pages/Comment";
+import Header from "../Header";
 
 
 function AppRouters() {
     return <Router>
+        {/* <Header/> */}
         {/* Nav menu */}
         <Navigation/>
         {/* Thiết lập định tuyến đến các page */}

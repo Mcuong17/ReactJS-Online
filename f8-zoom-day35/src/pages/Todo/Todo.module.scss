@@ -1,0 +1,177 @@
+.todo {
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.8),
+            rgba(0, 0, 0, 0.6),
+            rgba(0, 0, 0, 0.5));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px #0000004d;
+    color: white;
+    padding: 20px;
+    border-radius: 14px;
+    min-height: 464px;
+}
+
+.title-app {
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+}
+
+.wrapper-card {
+    border: 1px solid #fff;
+    padding: 20px 36px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.wrapper-card-left>.card-text {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.wrapper-card-left>.card-desc {
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.status-todo {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #ff5730;
+    border-radius: 50%;
+    background-color: #ff5730;
+    color: #000;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper-todolist {
+    padding-top: 20px;
+}
+
+.wrapper-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.no-result {
+    padding: 20px;
+    border: 1px solid;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.input-add {
+    flex: 0 0 80%;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+}
+
+.input-add::placeholder {
+    color: #fff;
+    font-weight: 200;
+}
+
+.btn-add {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ff5730;
+    border-radius: 50%;
+    background-color: #ff5730;
+    color: #000;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper-tasks {
+    padding-top: 20px;
+}
+
+.task-item {
+    padding: 10px 16px;
+    border: 1px solid #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.task-item-left {
+    flex: 0 0 70%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.task-item-left.done > .task-item-check {
+    background-color: #58cc4c;
+    border-color: #1bcb59;
+}
+
+.task-item-left.done > .task-item-name {
+    text-decoration: line-through;
+}
+
+.task-item-check {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ff5730;
+    border-radius: 50%;
+}
+
+.button-action {
+    flex: 1;
+    text-align: center;
+    padding: 12px 20px;
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease;
+}
+
+
+.button-action:hover {
+    background: rgba(0, 0, 0, 0.75);
+    transform: translateY(-2px);
+}
+
+.status-text {
+    margin: 0;
+    text-align: center;
+    padding-top: 15px;
+    font-size: 14px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.status-text.positive {
+    color: #1bcb59
+}
+
+.status-text.negative {
+    color: #f66c71;
+}
+
+button-action:active {
+    transform: scale(0.95);
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3);
+}

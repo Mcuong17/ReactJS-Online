@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import styles from "./Profile.module.scss";
-import Avatar from "../../assets/avatar.png"
 
 function Profile() {
   const [user, setUser] = useState({});
