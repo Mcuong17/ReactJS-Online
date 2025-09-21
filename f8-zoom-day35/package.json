@@ -3,13 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://Mcuong17.github.io/reactjs-online/f8-zoom-day35",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build -r https://github.com/Mcuong17/ReactJS-Course-Online"
+    "deploy": "gh-pages -d dist -b gh-pages"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

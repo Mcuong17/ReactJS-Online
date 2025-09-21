@@ -17,7 +17,7 @@ import Hooks from "../../pages/Hooks";
 
 function AppRouters() {
     return (<HashRouter>
-        <Router>
+        
         {/* <Header/> */}
         {/* Nav menu */}
         <Navigation/>
@@ -35,7 +35,7 @@ function AppRouters() {
             <Route path="/button" element={<Button />}></Route>
             <Route path="/hooks" element={<Hooks />}></Route>
         </Routes>
-    </Router>
+    
     </HashRouter>)
 }
 
