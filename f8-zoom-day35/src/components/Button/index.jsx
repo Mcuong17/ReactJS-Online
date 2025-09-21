@@ -11,6 +11,10 @@ function Button({
     bordered= false,
     rounded = false,
     primary = false,
+    secondary = false,
+    disabeld = false,
+    loading = false,
+    Onclick = () => {},
     children,
     className,
     size="medium",
@@ -24,13 +28,16 @@ function Button({
     const classButton = clsx(styles.wrapper, className, styles[size],
         {
             [styles.primary]: primary,
+            [styles.secondary]: secondary,
             [styles.rounded]: rounded,
             [styles.bordered]: bordered,
+            [styles.disabeld]: disabeld,
+            [styles.loading]: loading,
         }
     )
 
     let Component = href ? 'a' : 'button'
-    return <Component {...passProps} href={href} className={classButton} >{children}</Component>
+    return <Component {...passProps} href={href} onClick={(!disabeld && !loading) ? Onclick : () => {}} className={classButton} >{children}</Component>
 }
 
 Button.propTypes = {

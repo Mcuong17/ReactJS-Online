@@ -8,3 +8,20 @@ vào callback trước
 - B3: Thêm menu để đi đến các định tuyến đó thông qua nav
         navLink: Dùng để làm menu, <NavLink to="/"/>, nhận vào callback isActive để nhận biế active hay không
         LinkL cho link thông thường
+
+
+
+
+
+Hooks:
++ useRef: 
+        React sẽ set ref.current = element khi mount và set ref.current = null khi unmount
+
++ memo: Lưu trữ component con tránh re-render ko cần thiết ở component cha, chỉ khi props thay đổi mới gọi lại
++ useCallback lưu một component và tham
+React memo + useCallback
+
+useCallback: dùng trong phạm vi các component có liên quan đến nhau
+useMemo: dùng trong nội bộ của component, ghi nhớ một hàm và ko chạy lại hàm đó nếu deps thay đổi
+
+useImpreativeHandle: công khai những phương thức mà từ component con -> component cha 

@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, NavLink } from "react-router"
+import { HashRouter } from 'react-router'
 
 import Home from "../../pages/Home";
 import News from "../../pages/News";
@@ -9,13 +10,14 @@ import Product from "../../pages/Product";
 import Profile from "../../pages/Profile";
 import Weather from "../../pages/Weather";
 import Todo from "../../pages/Todo";
-import Button from "../../pages/Button";
+import Button from "../../pages/ButtonStyle";
 import Comment from "../../pages/Comment";
-import Header from "../Header";
+import Hooks from "../../pages/Hooks";
 
 
 function AppRouters() {
-    return <Router>
+    return (<HashRouter>
+        <Router>
         {/* <Header/> */}
         {/* Nav menu */}
         <Navigation/>
@@ -31,8 +33,10 @@ function AppRouters() {
             <Route path="/comment" element={<Comment />}></Route>
             <Route path="/weather" element={<Weather />}></Route>
             <Route path="/button" element={<Button />}></Route>
+            <Route path="/hooks" element={<Hooks />}></Route>
         </Routes>
     </Router>
+    </HashRouter>)
 }
 
 export default AppRouters;

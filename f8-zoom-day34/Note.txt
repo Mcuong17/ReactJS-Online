@@ -58,3 +58,13 @@ State: Dữ liệu hiển thị ra UI
 2. React Native: Làm mobile app
 - React
 - React navite: Framework, là cầu nối giữa React & Native(gần với ngôn ngữ máy)
+
+
+
+Bài 39:
+- Kĩ thuật Debounce:
++ Tạo một biến lưu timerId ban đầu, dùng useRef
++ cleartimerout trong useEffect trước khi gán timer
+
+
+-- Custom hook mà trả về một hàm thì cần cache lại bằng useCallback  để tránh render ko cần thiết

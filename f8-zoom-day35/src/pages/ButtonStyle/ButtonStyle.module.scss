@@ -1,0 +1,31 @@
+.wrapper {
+
+}
+.buttonLage {
+     padding: 10px 18px;
+     font-size: 2rem;
+}
+.primary {
+    background-color: rgb(5, 94, 5);
+    color: antiquewhite;
+    font-weight: 600;
+}
+.secondary {
+     background-color: rgb(164, 44, 7);
+    color: antiquewhite;
+    font-weight: 600;
+}
+
+.wrapperButton {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 16px;
+}
+
+.title {
+    font-size: 16px;
+    color: rgb(0, 42, 105);
+    font-weight: 600;
+    margin-bottom: 10px;
+}

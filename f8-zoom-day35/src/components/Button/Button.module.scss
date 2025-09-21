@@ -3,10 +3,20 @@
     border-radius: 8px;
     font-size: 16px;
     display: inline-block;
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+        transition: all linear 0.3s;
+    }
 }
 .primary {
-    background-color: #9d3abb;
+    background-color: #00285A;
     color: #fff;
+}
+.secondary {
+     background-color: #85133d;
+    color: #fff;
+
 }
 .rounded {
     border-radius: 999px;
@@ -15,6 +25,7 @@
     border-color: #9d3abb;
     background-color: transparent;
 }
+
 
 // Sizes
 .medium {
@@ -31,3 +42,37 @@
     padding: 8px 14px;
      font-size: 1.8rem;
 }
+
+
+.disabeld {
+    background-color: #a5a4a4;
+    color: #fff;
+    cursor: not-allowed;
+    opacity: 0.5;
+    &:hover {
+        opacity: 0.5;
+         cursor: not-allowed;
+    }
+}
+.loading {
+   opacity: 0.6;
+  position: relative;
+  padding-right: 20px;
+//   visibility: hidden;
+  &::before {
+     font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: normal;
+    content: "\e86a";
+    position: absolute;
+    right: 0;
+    top: 13px;
+    animation: l2 1s infinite linear;
+  }
+  &:hover {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+@keyframes l2 {to{transform: rotate(1turn)}}
