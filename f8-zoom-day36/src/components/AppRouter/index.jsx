@@ -23,10 +23,11 @@ function AppRouter() {
     return <>
         <Routes>
                   {/* Default layout */}  
-                 <Route path="/home" element={<DefaultLayout/>}>
-                    <Route index path="" Component={Home}></Route>
+                 <Route path="/" element={<DefaultLayout/>}>
+                    <Route index Component={Home}></Route>
                     <Route path="about" Component={About}></Route>
                     <Route path="posts" Component={Posts}></Route>
+                     <Route path="postdetail/:id" Component={PostDetail}></Route>
                     <Route path="privacy" Component={Privacy}></Route>
                      <Route path="contact" Component={Contact}></Route>
                  </Route>

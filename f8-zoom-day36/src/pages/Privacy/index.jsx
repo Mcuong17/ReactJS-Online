@@ -1,5 +1,5 @@
 function Privacy() {
-    return <div></div>
+    return <div> Privacy </div>
 }
 
 export default Privacy
