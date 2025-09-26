@@ -16,7 +16,7 @@
 
 .cardList {
     width: 70%;
-    margin: 30px auto;
+    margin: 100px auto;
         display: flex;
     align-items: center;
     justify-content: space-between;
@@ -24,11 +24,12 @@
 .cardItem {
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    min-height: 250px;
+    min-height: 210px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 20px;
     position: relative;
 }
 
@@ -44,5 +45,54 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+}
+
+.cardName {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.cardInfo {
+    background-color: bisque;
+    padding: 12px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    span {
+        font-weight: 500;
+        font-style: italic;
+    }
+}
+
+.cardBottom {
+    position: absolute;
+    bottom: 16px;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+}
+
+.price {
+    font-weight: bold;
+}
+
+.buttonAdd {
+    padding: 10px 16px;
+    background-color: rgb(10, 74, 151);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 10px;
+    transition: all linear 0.3s;
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
     }
 }

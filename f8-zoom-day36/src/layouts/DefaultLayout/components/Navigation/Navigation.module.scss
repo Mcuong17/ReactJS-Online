@@ -1,0 +1,24 @@
+.wrapper {
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 50%;
+    margin: 0 auto;
+    background-color: #222f3e;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.itemMenu {
+    text-decoration: none;
+    padding: 16px;
+    background-color: #2e86de;
+    font-size: 16px;
+    color: #fff;
+    border-radius: 10px;
+}
+.itemMenu.active {
+    background-color: #10ac84;
+    color: #fff;
+}
