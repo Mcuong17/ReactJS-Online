@@ -14,3 +14,26 @@
         object-fit: cover;
     }
 }
+
+.content {
+    h1 {
+        font-size: 20px;
+        text-align: center;
+        color: rgb(4, 95, 43);
+        font-weight: bold;
+        padding: 16px 0;
+    }
+}
+.itemAbout {
+    padding: 16px 0;
+    display: flex;
+    gap: 20px;
+    .number {
+        font-weight: bold;
+    }
+    .name,
+    .aboutContent {
+        color: rgb(3, 76, 62);
+         font-weight: bold;
+    }
+}

@@ -1,0 +1,77 @@
+.userManagement {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.userManagementHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.userManagementTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.userManagement .link {
+  font-size: 14px;
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.userManagement .link:hover {
+  text-decoration: underline;
+}
+
+.userTableWrapper {
+  overflow-x: auto;
+}
+
+.userTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.userTable th,
+.userTable td {
+  text-align: left;
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.userTable th {
+  background: #f9fafb;
+  font-weight: 600;
+  color: #555;
+}
+
+.userTable td {
+  color: #333;
+}
+
+.userTable tr:hover {
+  background: #f3f4f6;
+}
+
+
+.userTable td:last-child {
+  font-weight: 500;
+}
+
+.userStatusActive {
+  color: #16a34a;
+}
+
+.userStatusInactive {
+  color: #dc2626; 
+}

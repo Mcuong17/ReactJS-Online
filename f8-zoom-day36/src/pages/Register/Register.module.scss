@@ -1,0 +1,60 @@
+.wrapper {
+    width: 70%;
+    padding: 30% 20px 20px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center  ;
+}
+
+.inputWrapper {
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    
+    gap: 6px;
+    & > label {
+        font-size: 16px;
+        font-weight: 600;
+    }
+    & > input {
+        border: 1px solid #ccc;
+        padding: 8px 16px;
+        border-radius: 4px;
+    }
+}
+
+.inputWrapperCheckbox {
+    flex-direction: row;
+    align-items: center ;
+}
+
+.linkRegister {
+    display: inline-block;
+    color: #194cb0;
+    font-weight: 500;
+    width: 100%;
+    text-align: right;
+}
+
+.buttonAdd {
+    height: 40px;
+    width: 100%;
+    background-color: #6495F5;
+    color: #fff;
+    margin-top: 16px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    transition: opacity 0.3s linear;
+     font-size: 16px;
+    font-weight: 500;
+    &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+    }
+}

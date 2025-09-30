@@ -1,0 +1,46 @@
+.wraper {
+    position: fixed;
+    top: 0;
+    left: 365px;
+    right: 0;
+    z-index: 2;
+}
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.topbarLeft,
+.topbarRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.menuBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.pageTitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.greeting {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #cbd5e1;
+}

@@ -1,0 +1,141 @@
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+
+
+
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.statCard {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.statTitle {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.statValueRow {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.statValue {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.statDelta {
+  font-size: 0.875rem;
+  color: #16a34a;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1rem;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.cardTitle {
+  font-weight: 600;
+}
+
+.cardSubtitle {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+.link {
+  font-size: 0.875rem;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table th,
+.table td {
+  padding: 0.5rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.gridMain {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+}
+
+.gridLarge {
+  display: flex;
+  flex-direction: column;
+}
+
+.gridSide {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.chartWrapper {
+  height: 180px;
+}
+
+.gridSecondary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.notifications {
+  list-style: disc;
+  margin-left: 1.5rem;
+  color: #475569;
+  font-size: 0.875rem;
+}

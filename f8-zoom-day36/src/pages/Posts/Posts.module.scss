@@ -1,3 +1,52 @@
 .titlePost {
     font-weight: 600;
 }
+
+.wrapper {
+    width: 70%;
+    margin: 15px auto;
+    padding: 16px 0;
+    & > ul {
+        max-height: 350px;
+        overflow-y: scroll;
+    }
+}
+
+.title {
+    font-weight: 600;
+    font-size: 20px;
+    padding: 16px 0px;
+}
+
+.postItem {
+    padding: 16px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    margin-bottom: 12px;
+}
+.link {
+    color: #000;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.paginations {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding-top: 20px;
+}
+
+.pagination {
+    border: 1px solid #ccc;
+    padding: 8px;
+    &.active {
+        background-color: #04216c;
+        color: #fff;
+    }
+    &:hover {
+        cursor: pointer;
+    }
+}

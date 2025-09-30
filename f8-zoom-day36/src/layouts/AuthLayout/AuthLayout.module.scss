@@ -1,0 +1,30 @@
+.loginWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+}
+.loginImage,
+.loginMain {
+    flex: 0 0 60%;
+}
+
+.loginMain {
+    flex: 0 0 40%;
+}
+
+.loginImage {
+    background-image: url("../../assets/loginimg.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.nav {
+    position: absolute;
+}
+
+.loginMain {
+   display: flex;
+    align-items: flex-start;
+    height: 100%;
+}
