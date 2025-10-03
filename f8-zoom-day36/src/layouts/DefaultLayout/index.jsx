@@ -13,7 +13,7 @@ function DefaultLayout() {
         <div className={styles.mainLayout}>
             <Header />
             <Navigation/>
-            <div className="containner">
+            <div className={styles.containner}>
                 <Outlet/>
             </div>
             <Footer/>

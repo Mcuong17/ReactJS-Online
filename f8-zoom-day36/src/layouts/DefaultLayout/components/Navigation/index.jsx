@@ -11,6 +11,10 @@ const navItems = [
         to:"/about"
     },
     {
+        name: "Contact",
+        to:"/contact"
+    },
+    {
         name: "Post",
         to:"/posts"
     }

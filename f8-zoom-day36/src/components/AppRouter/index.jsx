@@ -23,9 +23,8 @@ import ScrollToTop from "../ScrollToTop"
 
 function AppRouter() {
     return <>
-    <ScrollToTop/>
+      <ScrollToTop/>
         <Routes>
-            
                   {/* Default layout */}  
                  <Route path="/" element={<DefaultLayout/>}>
                     <Route index Component={Home}></Route>

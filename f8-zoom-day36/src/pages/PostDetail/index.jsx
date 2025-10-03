@@ -38,9 +38,11 @@ function PostDetail() {
         <div> <span className={styles.titleItem}>UserID: </span> {post.userId}</div>
         <div> <span className={styles.titleItem}>Title: </span> {post.title}</div>
         <div> <span className={styles.titleItem}>Body: </span> {post.body}</div>
-        <h1>Comment</h1>
+
+        <h1 className={styles.titleComment}>Comment</h1>
+
         <div> {comment.map((item, index) => {
-            return(<div key={index}>
+            return(<div key={index}  className={styles.wrapperComment}>
                 <div> <span className={styles.titleItem}>Name: </span> {item.name}</div>
                 <div> <span className={styles.titleItem}>Email: </span> {item.email}</div>
                 <div> <span className={styles.titleItem}>Body: </span> {item.body}</div>
