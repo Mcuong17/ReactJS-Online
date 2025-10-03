@@ -4,30 +4,29 @@ import Link from "../../components/Link"
 
 import styles from "./Posts.module.scss"
 import { useSearchParams } from "react-router"
+import Pagination from "../../components/Pagination"
 
-
+const TOTAL_PAGE = 20
 function Posts() {
-
+    
     const [param, setParam] = useSearchParams()
     const [posts, setPosts] = useState([])
-    const [paging, setPaging] = useState(() => +param.get('paging') || 1)
+     const [page, setPage] = useState(() => +param.get('paging') || 1);
 
 
     useEffect(() => {
-        fetch(`https://jsonplaceholder.typicode.com/posts?_limit=10&_page=${paging}`)
+        fetch(`https://jsonplaceholder.typicode.com/posts?_limit=${TOTAL_PAGE}&_page=${page}`)
       .then(response => {
         return response.json()
       })
       .then(json => setPosts(json))
-    },[paging])
+    },[page])
 
     useEffect(() => {
-        setParam( paging <= 1 ? '' : { paging })
-    },[paging, setParam])
+        setParam( page <= 1 ? '' : { page })
+    },[page, setParam])
 
-    const handlePagination = (index) => {
-        setPaging(index)
-    }
+
 
     return <div className={styles.wrapper}>
          <h1 className={styles.title}>Post list</h1>
@@ -39,21 +38,12 @@ function Posts() {
             </li>)}
         </ul>
 
-        <h2>Pagination</h2>
-        <ul className={styles.paginations}>
-            <li className={styles.pagination} onClick={() => handlePagination(paging - 1)}>{`<<`}</li>
-            {Array(10).fill(null).map((_, index ) => {
-            const pageNum = index+1
-            return  <li 
-            key={index} 
-            className={`${styles.pagination} ${paging === pageNum ? styles.active : ''}`}
-            onClick={() => handlePagination(index + 1)} >
-                {pageNum}
-            </li>
-        }
-           )}
-            <li className={styles.pagination}  onClick={() => handlePagination(paging + 1)}>{`>>`}</li>
-        </ul>
+
+        <Pagination
+        currentPage={page}
+        totalPages={TOTAL_PAGE}
+        onPageChange={(newPage) => setPage(newPage)}
+      />
     </div>
 }
 
