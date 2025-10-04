@@ -17,7 +17,9 @@ function Login() {
             </div>
             <div>
                <NavLink to="/register" className={styles.linkRegister}>Register?</NavLink>
-               <button className={styles.buttonAdd}>Login</button>
+               <button className={styles.buttonAdd}>
+                <NavLink to="/admin" className={styles.linkRegister}>Login</NavLink>
+               </button>
             </div>
         </form>
     </div>

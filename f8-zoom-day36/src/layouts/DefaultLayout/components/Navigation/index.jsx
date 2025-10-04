@@ -17,6 +17,10 @@ const navItems = [
     {
         name: "Post",
         to:"/posts"
+    },
+    {
+        name: "CMS",
+        to:"/login"
     }
 ]
 
