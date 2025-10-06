@@ -1,0 +1,39 @@
+.modal {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    padding: 16px 28px;
+    border-radius: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    box-shadow: 0 -4px 32px #0003;
+    transition: all ease-in-out .3s;
+    animation: fadeIn ease .3s;
+    border-radius: 10px;
+    padding-left: 0;
+    margin: 0;
+    overflow: hidden;
+    will-change: opacity, transform;
+    color: #1d2129;
+}
+
+.closeIcon {
+    font-size: 16px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+@keyframes fadeIn {
+     0% {
+        opacity: 0;
+        transform: translateY(-8px)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
