@@ -30,3 +30,32 @@
     right: 10px;
     top: 10px;
 }
+
+.contentSearch {
+    padding: 6px 16px;
+    border-bottom: 1px solid var(--gray-color);
+}
+.itemGroup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+}
+.lableGroup {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 4px 0;
+}
+
+.itemGroupAvatar {
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-position: center;
+    border-radius: 9999px;
+}
+
+.itemGroupName {
+    font-size: 16px;
+    font-weight: 400;
+}
