@@ -13,7 +13,7 @@ import Video3 from '../../../../assets/images/video_3.jpg'
 import styles from './SearchForm.module.scss'
 import { useState } from "react";
 import Modal from "../../../../components/Modal";
-import { useEffect } from "react";
+
 
 const data = [
     {
@@ -82,67 +82,88 @@ const data = [
 ]
 
 function SearchForm() {
-    console.log('data', data)
     const [isOpen, setIsOpen] = useState(false)
     const [searchContent, setSerchContent] = useState('')
-    const [searchList, setSearchList] = useState([])
-
 
     const handleSearch = (value) => {
         setSerchContent(value)
     }
 
 
-    // useEffect(() => {
-    //     setSearchList((prevState) => {
-    //         return [...prevState, searchContent]
-    //     })
-    // }, [searchContent])
+const removeVietnameseTones = (str) => {
+    return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/đ/g, "d").replace(/Đ/g, "D");
+};
 
 
+const filteredData = data
+    .map(group => ({
+        ...group,
+        item: group.item.filter(course => {
+            const search = removeVietnameseTones(searchContent.toLowerCase().trim());
+            const name = removeVietnameseTones(course.name.toLowerCase());
+            return name.includes(search); 
+        })
+    }))
+    .filter(group => group.item.length > 0);
 
-    return <div className={styles.wrapper}>
-        <div className={styles.searchIcon}>
-            <FaMagnifyingGlass />
-        </div>
-        <input
-            className={styles.inputSearch}
-            type="text"
-            placeholder="Tìm kiếm khóa học, bài viết, video,..."
-            value={searchContent}
-            onChange={(e) => handleSearch(e.target.value)}
-            onFocus={() => setIsOpen(true)}
-        />
+    return (
+        <div className={styles.wrapper}>
+            <div className={styles.searchIcon}>
+                <FaMagnifyingGlass />
+            </div>
+            <input
+                className={styles.inputSearch}
+                type="text"
+                placeholder="Tìm kiếm khóa học, bài viết, video,..."
+                value={searchContent}
+                onChange={(e) => handleSearch(e.target.value)}
+                onFocus={() => setIsOpen(true)}
+            />
 
-
-
-
-        {isOpen && (
-            <Modal isOpen onRequestClose={() => setIsOpen(!isOpen)}>
-                <div className={styles.searchFor}>
-                    <div className={styles.searchIcon}>
-                        <FaMagnifyingGlass />
-                    </div>
-                    <h3>Kết quả cho ''</h3>
-                </div>
-                <div>
-                    {data.map((courses, index) => {
-                        return <div key={index} className={styles.contentSearch}>
-                            <div className={styles.lableGroup}>{courses.group.toUpperCase()}</div>
-                            <div>
-                               {courses.item.map(course => {
-                                return <div key={course.id} className={styles.itemGroup}>
-                                    <div className={styles.itemGroupAvatar} style={{ backgroundImage: `url(${course.icon})` }}></div>
-                                    <div className={styles.itemGroupName}>{course.name}</div>
-                                </div>
-                               })}
-                            </div>
+            {isOpen && (
+                <Modal isOpen onRequestClose={() => setIsOpen(!isOpen)}>
+                    <div className={styles.searchFor}>
+                        <div className={styles.searchIcon}>
+                            <FaMagnifyingGlass />
                         </div>
-                    })}
-                </div>
-            </Modal>
-        )}
-    </div>
+                        <h3>Kết quả cho '{searchContent}'</h3>
+                    </div>
+
+                    <div>
+                        {filteredData.length > 0 ? (
+                            filteredData.map((courses, index) => (
+                                <div key={index} className={styles.contentSearch}>
+                                    <div className={styles.lableGroup}>
+                                        {courses.group.toUpperCase()}
+                                        <a href="/">Xem Thêm</a>
+                                    </div>
+                                    <div>
+                                        {courses.item.map(course => (
+                                            <div key={course.id} className={styles.itemGroup}>
+                                                <div
+                                                    className={styles.itemGroupAvatar}
+                                                    style={{ backgroundImage: `url(${course.icon})` }}
+                                                ></div>
+                                                <div className={styles.itemGroupName}>
+                                                    {course.name}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div className={styles.noResult}>Không tìm thấy kết quả nào.</div>
+                        )}
+                    </div>
+                </Modal>
+            )}
+        </div>
+    );
 }
+
 
 export default SearchForm;

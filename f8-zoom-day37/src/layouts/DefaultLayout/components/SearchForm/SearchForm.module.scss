@@ -45,6 +45,14 @@
     font-size: 16px;
     font-weight: bold;
     padding: 4px 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    & > a {
+        text-decoration: none;
+        color: #a19393;
+        font-weight: 500;   
+    }
 }
 
 .itemGroupAvatar {
@@ -58,4 +66,14 @@
 .itemGroupName {
     font-size: 16px;
     font-weight: 400;
+}
+
+.searchFor {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 10px;
+    & > h3 {
+        font-size: 12px;
+    }
 }
